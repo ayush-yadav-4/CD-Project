@@ -1,6 +1,6 @@
 
 # Three Address Code Generator for 3D Array
-## Deployment Link (Teat at) = https://ayush-yadav-4.github.io/CD-Project/
+## Deployment Link (Checkout at) = https://ayush-yadav-4.github.io/CD-Project/
 ## 📌 Introduction
 This project is a **Three Address Code (TAC) Generator** for accessing elements in a **3D array** using **Row-Major Order**.  
 It takes user input (array indices, dimensions, element size, and base address) and generates the corresponding **TAC representation**.
