@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Address Code Generator for 3D Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            margin-top:200px;
+             margin-bottom:100px;
+             padding-bottom:50px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+        .container {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            width: 50%;
+            animation: fadeIn 1s ease-in-out;
+        }
+        input, button {
+            margin: 10px;
+            padding: 12px;
+            width: 80%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input {
+            background: #333;
+            color: white;
+        }
+        button {
+            background: #ff5733;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff2e00;
+        }
+        pre {
+            background: #222;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: left;
+            overflow-x: auto;
+            font-size: 18px;
+            width: 90%;
+            min-height: 150px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Three Address Code Generator for 3D Array</h1>
+        <input type="text" id="arrayName" placeholder="Array Name (e.g., A)">
+        <input type="number" id="i" placeholder="i index">
+        <input type="number" id="j" placeholder="j index">
+        <input type="number" id="k" placeholder="k index">
+        <input type="number" id="baseAddress" placeholder="Base Address (e.g., 1000) (1000 Default)">
+        <input type="number" id="rowSize" placeholder="Row Size">
+        <input type="number" id="colSize" placeholder="Column Size">
+        <input type="number" id="elementSize" placeholder="Element Size (4 By Default)">
+        <button onclick="generateTAC()">Generate TAC</button>
+        <pre id="output"></pre>
+    </div>
+    <div class="footer">Group Members: [Your Names Here]</div>
+    <script>
+        function generateTAC() {
+            let arrayName = document.getElementById("arrayName").value || "A";
+            let i = parseInt(document.getElementById("i").value) || 0;
+            let j = parseInt(document.getElementById("j").value) || 0;
+            let k = parseInt(document.getElementById("k").value) || 0;
+            let baseAddress = parseInt(document.getElementById("baseAddress").value) || 1000;
+            let rowSize = parseInt(document.getElementById("rowSize").value) || 4;
+            let colSize = parseInt(document.getElementById("colSize").value) || 4;
+            let elementSize = parseInt(document.getElementById("elementSize").value) || 4;
+            
+            let t1 = `t1 = ${i} * ${rowSize}`;
+            let t2 = `t2 = ${j} * ${colSize}`;
+            let t3 = `t3 = t1 + t2`;
+            let t4 = `t4 = ${k} * ${elementSize}`;
+            let t5 = `t5 = t3 + t4`;
+            let t6 = `t6 = ${baseAddress} + t5`;
+            let final = `${arrayName}[${i}][${j}][${k}] = *t6`;
+            
+            document.getElementById("output").innerText = `${t1}\n${t2}\n${t3}\n${t4}\n${t5}\n${t6}\n${final}`;
+        }
+    </script>
+</body>
+</html>
+
+
