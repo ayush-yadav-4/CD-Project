@@ -1,112 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Address Code Generator for 3D Array</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            margin-top:200px;
-             margin-bottom:100px;
-             padding-bottom:50px;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
-        .container {
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-            width: 50%;
-            animation: fadeIn 1s ease-in-out;
-        }
-        input, button {
-            margin: 10px;
-            padding: 12px;
-            width: 80%;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        input {
-            background: #333;
-            color: white;
-        }
-        button {
-            background: #ff5733;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #ff2e00;
-        }
-        pre {
-            background: #222;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: left;
-            overflow-x: auto;
-            font-size: 18px;
-            width: 90%;
-            min-height: 150px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #bbb;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Array TAC Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .container {
+      background: #1f1f1f;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #ff7538;
+    }
+    input, button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+    input {
+      background-color: #333;
+      color: white;
+    }
+    button {
+      background-color: #ff5c2b;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #e04315;
+    }
+    pre {
+      background-color: #222;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Three Address Code Generator for 3D Array</h1>
-        <input type="text" id="arrayName" placeholder="Array Name (e.g., A)">
-        <input type="number" id="i" placeholder="i index">
-        <input type="number" id="j" placeholder="j index">
-        <input type="number" id="k" placeholder="k index">
-        <input type="number" id="baseAddress" placeholder="Base Address (e.g., 1000) (1000 Default)">
-        <input type="number" id="rowSize" placeholder="Row Size">
-        <input type="number" id="colSize" placeholder="Column Size">
-        <input type="number" id="elementSize" placeholder="Element Size (4 By Default)">
-        <button onclick="generateTAC()">Generate TAC</button>
-        <pre id="output"></pre>
-    </div>
- 
-    <script>
-        function generateTAC() {
-            let arrayName = document.getElementById("arrayName").value || "A";
-            let i = parseInt(document.getElementById("i").value) || 0;
-            let j = parseInt(document.getElementById("j").value) || 0;
-            let k = parseInt(document.getElementById("k").value) || 0;
-            let baseAddress = parseInt(document.getElementById("baseAddress").value) || 1000;
-            let rowSize = parseInt(document.getElementById("rowSize").value) || 4;
-            let colSize = parseInt(document.getElementById("colSize").value) || 4;
-            let elementSize = parseInt(document.getElementById("elementSize").value) || 4;
-            
-            let t1 = `t1 = ${i} * ${rowSize}`;
-            let t2 = `t2 = ${j} * ${colSize}`;
-            let t3 = `t3 = t1 + t2`;
-            let t4 = `t4 = ${k} * ${elementSize}`;
-            let t5 = `t5 = t3 + t4`;
-            let t6 = `t6 = ${baseAddress} + t5`;
-            let final = `${arrayName}[${i}][${j}][${k}] = *t6`;
-            
-            document.getElementById("output").innerText = `${t1}\n${t2}\n${t3}\n${t4}\n${t5}\n${t6}\n${final}`;
-        }
-    </script>
+  <div class="container">
+    <h1>Three Address Code Generator for 3D Array</h1>
+    
+    <input type="text" id="arrayName" placeholder="Array Name (e.g., A)">
+    <input type="number" id="i" placeholder="i index">
+    <input type="number" id="j" placeholder="j index">
+    <input type="number" id="k" placeholder="k index">
+    <input type="number" id="rowSize" placeholder="Row Size (L)">
+    <input type="number" id="colSize" placeholder="Column Size (M)">
+    <input type="number" id="depthSize" placeholder="Depth Size (N)">
+    <input type="number" id="elementSize" placeholder="Element Size in Bytes (Default = 4)">
+    <input type="number" id="baseAddress" placeholder="Base Address (Default = 1000)">
+    
+    <button onclick="generateTAC()">Generate TAC</button>
+    
+    <pre id="output"></pre>
+  </div>
+  <div class="footer">Created by Your Team 😊</div>
+
+  <script>
+    function generateTAC() {
+      let arrayName = document.getElementById("arrayName").value || "A";
+      let i = parseInt(document.getElementById("i").value) || 0;
+      let j = parseInt(document.getElementById("j").value) || 0;
+      let k = parseInt(document.getElementById("k").value) || 0;
+      let L = parseInt(document.getElementById("rowSize").value) || 3;
+      let M = parseInt(document.getElementById("colSize").value) || 4;
+      let N = parseInt(document.getElementById("depthSize").value) || 5;
+      let elementSize = parseInt(document.getElementById("elementSize").value) || 4;
+      let baseAddress = parseInt(document.getElementById("baseAddress").value) || 1000;
+
+      let t1 = `t1 = ${i} * ${M}`;
+      let t2 = `t2 = t1 + ${j}`;
+      let t3 = `t3 = t2 * ${N}`;
+      let t4 = `t4 = t3 + ${k}`;
+      let t5 = `t5 = t4 * ${elementSize}`;
+      let t6 = `t6 = ${baseAddress} + t5`;
+      let result = `Address of ${arrayName}[${i}][${j}][${k}] = t6`;
+
+      document.getElementById("output").innerText =
+        `${t1}\n${t2}\n${t3}\n${t4}\n${t5}\n${t6}\n${result}`;
+    }
+  </script>
 </body>
 </html>
-
-
